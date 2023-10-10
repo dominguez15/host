@@ -1,0 +1,24 @@
+<form [formGroup]="fb" (ngSubmit)="guardar(fb.controls['nombre'].value, fb.controls['url'].value)">
+    <div class="form-group">
+        <label for="nombre" class="style-labels">Nombre</label>
+        <input type="text" class="form-control" id="nombre" formControlName="nombre" placeholder="Ingresar nombre..." />
+        <div *ngIf="nombreControl?.hasError('required') && nombreControl?.touched">
+            El nombre es obligatorio.
+        </div>
+        <div *ngIf="nombreControl?.hasError('minlength') && nombreControl?.touched">
+            El nombre debe tener al menos 4 caracteres.
+        </div>
+    </div>
+    <ul>
+        <ul *ngIf="!campoNombreVacio">
+            <li *ngFor="let r of searchResults">{{r}}</li>
+        </ul>
+    </ul>
+
+    <div class="form-group">
+        <label for="image-url" class="style-labels">Imagen Url</label>
+        <input type="text" class="form-control" id="image-url" formControlName="url"
+            placeholder="Ingrese la url de la imagen..." />
+    </div>
+    <button type="submit" class="btn btn-primary styles-guardar" *ngIf="fb.valid">Guardar</button>
+</form>
